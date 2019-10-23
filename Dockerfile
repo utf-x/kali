@@ -30,12 +30,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN set -x \
     && apt-get -yqq update \
     && apt-get -yqq upgrade \
-    && apt-get -yqq autoremove \
-    && apt-get -yqq install  \
-    kali-linux-pwtools \
-    git \
-    mlocate \
-    && apt-get -yqq clean
+    && apt-get -yqq dist-upgrade \
+    && apt-get clean
 
 RUN apt-get install -y metasploit-framework
 
@@ -43,10 +39,14 @@ RUN RUN sed -i 's/systemctl status ${PG_SERVICE}/service ${PG_SERVICE} status/g'
     service postgresql start && \
     msfdb reinit
 
-RUN mkdir -p pewpew \
+RUN apt-get install -y git \
+    && mkdir -p pewpew \
     && cd pewpew \
     && git clone https://github.com/1N3/Sn1per.git \
     && cd Sn1per \
     && ./install.sh
-
+# Add the following to run the professional version.
+# cd /usr/share/sniper/
+# wget https://xerosecurity.com/pro/6.0/[YOURCUSTOMLICENSEKEYHERE]/pro.sh -O pro.sh
+# If you did that: you need to configure the entrypoint and config/expose the web service.
 CMD ["bash"]
