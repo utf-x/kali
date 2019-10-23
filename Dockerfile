@@ -35,7 +35,7 @@ RUN set -x \
 
 RUN apt-get install -y metasploit-framework
 
-RUN RUN sed -i 's/systemctl status ${PG_SERVICE}/service ${PG_SERVICE} status/g' /usr/bin/msfdb && \
+RUN sed -i 's/systemctl status ${PG_SERVICE}/service ${PG_SERVICE} status/g' /usr/bin/msfdb && \
     service postgresql start && \
     msfdb reinit
 
