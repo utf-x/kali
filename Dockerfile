@@ -34,5 +34,12 @@ RUN set -x \
     kali-linux-pwtools \
     kali-linux-web \
     kali-linux-wireless \
-    && apt-get -yqq clean
-CMD ["bash"]
+    && apt-get -yqq clean \
+    && curl https://getmic.ro | bash - \
+    && mv micro /usr/bin \
+    && git clone https://github.com/1N3/Sn1per sniper \
+    && cd sniper \
+    && bash install.bash \
+
+
+CMD ["/bin/bash"]
