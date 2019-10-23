@@ -1,3 +1,4 @@
+# Pull the fork of the official kali image ;)
 FROM pidof/kalister:booya
 
 # Metadata params
@@ -11,7 +12,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.version=$VERSION \
       org.label-schema.name='Kali Linux' \
-      org.label-schema.description='Official Kali Linux docker image' \
+      org.label-schema.description='Kinda Offical Kali Linux docker image' \
       org.label-schema.usage='https://www.kali.org/news/official-kali-linux-docker-images/' \
       org.label-schema.url='https://www.kali.org/' \
       org.label-schema.vendor='Offensive Security' \
@@ -32,14 +33,20 @@ RUN set -x \
     && apt-get -yqq autoremove \
     && apt-get -yqq install  \
     kali-linux-pwtools \
-    kali-linux-web \
-    kali-linux-wireless \
-    && apt-get -yqq clean \
-    && curl https://getmic.ro | bash - \
-    && mv micro /usr/bin \
-    && git clone https://github.com/1N3/Sn1per sniper \
-    && cd sniper \
-    && bash install.bash \
+    git \
+    mlocate \
+    && apt-get -yqq clean
 
+RUN apt-get install -y metasploit-framework
 
-CMD ["/bin/bash"]
+RUN RUN sed -i 's/systemctl status ${PG_SERVICE}/service ${PG_SERVICE} status/g' /usr/bin/msfdb && \
+    service postgresql start && \
+    msfdb reinit
+
+RUN mkdir -p pewpew \
+    && cd pewpew \
+    && git clone https://github.com/1N3/Sn1per.git \
+    && cd Sn1per \
+    && ./install.sh
+
+CMD ["bash"]
