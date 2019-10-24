@@ -40,11 +40,10 @@ RUN sed -i 's/systemctl status ${PG_SERVICE}/service ${PG_SERVICE} status/g' /us
     msfdb reinit
 
 RUN apt-get install -y git \
-    && mkdir -p pewpew \
-    && cd pewpew \
     && git clone https://github.com/1N3/Sn1per.git \
     && cd Sn1per \
-    && ./install.sh
+    && sed '26,27d' ./install.sh \
+    && bash install.sh
 # Add the following to run the professional version.
 # cd /usr/share/sniper/
 # wget https://xerosecurity.com/pro/6.0/[YOURCUSTOMLICENSEKEYHERE]/pro.sh -O pro.sh
