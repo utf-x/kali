@@ -44,6 +44,11 @@ RUN apt-get install -y git \
     && git clone --recursive git://github.com/anoncam/Sn1per.git \
     && cd /root/Sn1per \
     && bash /root/Sn1per/install.sh
+
+RUN cd /root \
+	&& git clone --recursive git://github.com/1N3/Findsploit.git \
+	&& chmod +x /root/Findsploit/install.sh \
+	&& bash /root/Findsploit/install.sh
 # Add the following to run the professional version.
 # cd /usr/share/sniper/
 # wget https://xerosecurity.com/pro/6.0/[YOURCUSTOMLICENSEKEYHERE]/pro.sh -O pro.sh
