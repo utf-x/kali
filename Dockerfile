@@ -40,17 +40,19 @@ RUN sed -i 's/systemctl status ${PG_SERVICE}/service ${PG_SERVICE} status/g' /us
     msfdb reinit
 # Establish a working directory
 RUN apt-get install -y git \
-    && cd /root \
+    && cd \
     && git clone --recursive git://github.com/anoncam/Sn1per.git \
-    && cd /root/Sn1per \
-    && bash /root/Sn1per/install.sh
+    && cd Sn1per \
+    && cd Sn1per \
+    && ./install.sh
 
 RUN cd /root \
 	&& git clone --recursive git://github.com/1N3/Findsploit.git \
-	&& chmod +x /root/Findsploit/install.sh \
-	&& bash /root/Findsploit/install.sh
+	&& cd Findsploid \
+	&& chmod +x install.sh
+	&& ./install.sh
 # Add the following to run the professional version.
 # cd /usr/share/sniper/
 # wget https://xerosecurity.com/pro/6.0/[YOURCUSTOMLICENSEKEYHERE]/pro.sh -O pro.sh
 # If you did that: you need to configure the entrypoint and config/expose the web service.
-CMD ["/bin/bash"]
+CMD ["bash"]
