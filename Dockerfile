@@ -1,5 +1,5 @@
-# Pull the fork of the official kali image ;)
-FROM pidof/kalister:booya
+# the other repo has changed purposes.
+FROM kalilinux/kali-linux-docker:latest
 
 # Metadata params
 ARG BUILD_DATE
