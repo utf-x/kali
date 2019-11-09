@@ -49,7 +49,7 @@ RUN apt-get install -y git \
 RUN cd /root \
 	&& git clone --recursive git://github.com/1N3/Findsploit.git \
 	&& cd Findsploid \
-	&& chmod +x install.sh
+	&& chmod +x install.sh \
 	&& ./install.sh
 # Add the following to run the professional version.
 # cd /usr/share/sniper/
